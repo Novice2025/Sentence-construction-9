@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>NEXTATION – Negatives (Don't, Doesn't, Didn't, Isn't, Aren't)</title>
+  <style>
+    :root {
+      /* NEXTATION WEBSITE — COLOUR SYSTEM (from your PDF) */
+      --bg-main: #02030b; /* Page background */
+      --bg-gradient: radial-gradient(circle at top, #1c1f3b 0%, #050716 45%, #02030b 100%);
+      /* Surfaces / Cards */
+      --card-bg: rgba(15, 18, 40, 0.92);        /* Lesson panels */
+      --card-soft-bg: rgba(18, 21, 50, 0.88);   /* Tab cards and navigation buttons */
+      /* Neon accents */
+      --accent-cyan: #4ef2ff;   /* Cyan highlight around edges */
+      --accent-pink: #ff2f92;   /* Magenta highlight for buttons */
+      --accent-green: #4dff9b;  /* Success / tab completed mark */
+      --accent-yello: #ffe25f;  /* Accent blended in text gradients */
+      --accent-purple: #aa5dff; /* Hover glows and edges */
+      /* Text and borders */
+      --muted: rgba(255,255,255,0.65);
+      --border-glow: rgba(120,120,255,0.45);
+      /* Shadows */
+      --shadow-strong: 0 0 36px rgba(130,80,255,0.6);
+      --shadow-soft: 0 0 20px rgba(0,0,0,0.65);
+      /* Radii and transitions */
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg-gradient);
+      color:#fff;
+      min-height:100vh;
+      padding:32px 24px; /* Increased padding for more overall space */
+      display:flex;
+      justify-content:center;
+      line-height:1.8; /* Increased line height for better readability */
+    }
+    .app{max-width:1100px;width:100%;}
+
+    /* HEADER */
+    .neon-header{
+      position:relative;
+      padding:22px 24px 18px;
+      border-radius:var(--radius-lg);
+      background:rgba(3,5,20,0.9);
+      box-shadow:var(--shadow-soft);
+      border:1px solid var(--border-glow);
+      margin-bottom:32px; /* Increased margin-bottom */
+      overflow:hidden;
+    }
+    .neon-header::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:linear-gradient(90deg,#00f5ff,#ff2f92,#ffe25f,#4dff9b);
+      opacity:0.5;
+      mix-blend-mode:screen;
+      pointer-events:none;
+      z-index:-1;
+    }
+    .header-main{display:flex;align-items:center;gap:20px;margin-bottom:12px;} /* Increased gap and margin */
+    .teacher-orb{
+      width:68px;height:68px;border-radius:50%;
+      background:radial-gradient(circle,#ffffff 0%,#00fff0 35%,#ff2f92 70%,#02030b 100%);
+      box-shadow:0 0 24px rgba(0,255,255,0.7),0 0 32px rgba(255,0,160,0.55);
+      flex-shrink:0;
+    }
+    .brand-title{
+      font-size:1.45rem;
+      background:linear-gradient(90deg,#4ef2ff,#ff2f92);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:700;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      margin-bottom:6px; /* Increased margin */
+    }
+    .brand-sub{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-top:4px; /* Increased margin */
+    }
+    .lesson-title{
+      margin-top:18px; /* Increased margin */
+      font-size:1.35rem; /* Slightly larger for emphasis */
+      color:var(--accent-cyan);
+      text-shadow:0 0 12px rgba(78,242,255,0.5);
+    }
+
+    .controls-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px; /* Increased gap */
+      margin-top:18px; /* Increased margin */
+      font-size:0.9rem;
+    }
+    .small-btn{
+      padding:8px 14px; /* Slightly larger padding */
+      border-radius:999px;
+      border:1px dashed rgba(255,255,255,0.35);
+      background:transparent;
+      color:#fff;
+      cursor:pointer;
+      transition:var(--transition-fast);
+    }
+    .small-btn:hover{
+      border-color:var(--accent-cyan);
+      color:var(--accent-cyan);
+      box-shadow:0 0 8px rgba(78,242,255,0.4);
+    }
+    .small-btn:active{
+      transform:scale(0.98);
+    }
+
+    /* TABS */
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px; /* Increased gap */
+      margin-bottom:28px; /* Increased margin */
+    }
+    .tab{
+      padding:12px 20px; /* Increased padding */
+      background:var(--card-soft-bg);
+      border-radius:var(--radius-md);
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow:var(--shadow-soft);
+      transition:var(--transition-med);
+      color:var(--muted);
+      font-weight:500;
+      letter-spacing:0.02em;
+      position:relative;
+      overflow:hidden;
+      flex-shrink:0; /* Prevent tabs from shrinking too much */
+    }
+    .tab:hover{
+      border-color:var(--accent-purple);
+      box-shadow:0 0 15px var(--accent-purple);
+      color:#fff;
+    }
+    .tab.active{
+      background:var(--card-bg);
+      border-color:var(--accent-cyan);
+      color:var(--accent-cyan);
+      box-shadow:0 0 18px rgba(78,242,255,0.6);
+      font-weight:600;
+    }
+    .tab.active::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(45deg, rgba(78,242,255,0.15), rgba(255,47,146,0.05));
+      z-index:0;
+    }
+    .tab span{position:relative;z-index:1;}
+
+    /* PANELS */
+    .panel{
+      display:none;
+      background:var(--card-bg);
+      border-radius:var(--radius-lg);
+      padding:32px; /* Increased padding */
+      box-shadow:var(--shadow-strong);
+      border:1px solid var(--border-glow);
+      margin-bottom:24px; /* Consistent margin */
+    }
+    .panel.active{display:block;}
+
+    .card-inner{
+      padding:24px; /* Increased padding for inner content */
+      border-radius:var(--radius-md);
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.1);
+      margin-bottom:24px; /* Increased margin */
+    }
+
+    .section-title{
+      font-size:1.6rem;
+      color:var(--accent-yello);
+      text-shadow:0 0 10px rgba(255,226,95,0.4);
+      margin-bottom:18px; /* Increased margin */
+      text-align:center;
+      line-height:1.3;
+    }
+    .section-sub{
+      font-size:1.1rem;
+      color:var(--muted);
+      text-align:center;
+      margin-bottom:28px; /* Increased margin */
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .sub-title{
+      font-size:1.3rem;
+      color:var(--accent-pink);
+      text-shadow:0 0 8px rgba(255,47,146,0.4);
+      margin-top:32px; /* Increased margin */
+      margin-bottom:16px; /* Increased margin */
+      border-bottom:1px dashed rgba(255,255,255,0.1);
+      padding-bottom:8px;
+    }
+    .paragraph{
+      margin-bottom:18px; /* Increased margin */
+      color:#fff;
+    }
+    .paragraph strong{color:var(--accent-cyan);}
+    .paragraph em{color:var(--accent-yello);}
+
+    .block-container{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px; /* Increased gap */
+      margin-top:18px; /* Increased margin */
+      margin-bottom:18px; /* Increased margin */
+      justify-content:center;
+    }
+    .block{
+      background:rgba(78,242,255,0.1);
+      border:1px solid var(--accent-cyan);
+      padding:10px 18px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      color:var(--accent-cyan);
+      font-weight:600;
+      font-size:1.1rem;
+      text-shadow:0 0 8px rgba(78,242,255,0.5);
+      flex-shrink:0;
+    }
+    .block.pink{
+      background:rgba(255,47,146,0.1);
+      border-color:var(--accent-pink);
+      color:var(--accent-pink);
+      text-shadow:0 0 8px rgba(255,47,146,0.5);
+    }
+    .block.yellow{
+      background:rgba(255,226,95,0.1);
+      border-color:var(--accent-yello);
+      color:var(--accent-yello);
+      text-shadow:0 0 8px rgba(255,226,95,0.5);
+    }
+    .block.purple{
+      background:rgba(170,93,255,0.1);
+      border-color:var(--accent-purple);
+      color:var(--accent-purple);
+      text-shadow:0 0 8px rgba(170,93,255,0.5);
+    }
+    .block.green{
+      background:rgba(77,255,155,0.1);
+      border-color:var(--accent-green);
+      color:var(--accent-green);
+      text-shadow:0 0 8px rgba(77,255,155,0.5);
+    }
+
+    .example-en{
+      font-size:1.4rem;
+      font-weight:700;
+      color:var(--accent-cyan);
+      text-shadow:0 0 10px rgba(78,242,255,0.5);
+      margin-top:24px; /* Increased margin */
+      margin-bottom:10px; /* Increased margin */
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .example-pt{
+      font-size:1.1rem;
+      color:var(--muted);
+      margin-bottom:24px; /* Increased margin */
+    }
+
+    .super-tip{
+      background:rgba(255,226,95,0.08);
+      border-left:4px solid var(--accent-yello);
+      padding:16px 20px; /* Increased padding */
+      margin-top:28px; /* Increased margin */
+      margin-bottom:28px; /* Increased margin */
+      border-radius:var(--radius-sm);
+      font-size:0.95rem;
+      color:var(--accent-yello);
+      line-height:1.6;
+    }
+    .super-tip strong{color:#fff;}
+
+    .micro-practice-section{
+      background:var(--card-soft-bg);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:var(--radius-md);
+      padding:20px; /* Increased padding */
+      margin-top:32px; /* Increased margin */
+      margin-bottom:32px; /* Increased margin */
+    }
+    .micro-practice-section .sub-title{
+      margin-top:0;
+      margin-bottom:12px;
+      padding-bottom:6px;
+      font-size:1.15rem;
+      color:var(--accent-green);
+      text-shadow:0 0 6px rgba(77,255,155,0.4);
+    }
+    .micro-practice-section label{
+      display:block;
+      margin-bottom:8px; /* Increased margin */
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+    .micro-practice-section input[type="text"]{
+      width:100%;
+      padding:10px 14px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(255,255,255,0.2);
+      background:rgba(0,0,0,0.3);
+      color:#fff;
+      font-size:1rem;
+      margin-bottom:12px; /* Increased margin */
+      transition:var(--transition-fast);
+    }
+    .micro-practice-section input[type="text"]:focus{
+      outline:none;
+      border-color:var(--accent-cyan);
+      box-shadow:0 0 8px rgba(78,242,255,0.5);
+    }
+    .micro-practice-section .check-btn{
+      background:var(--accent-green);
+      color:var(--bg-main);
+      padding:10px 20px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      transition:var(--transition-fast);
+      margin-top:10px; /* Increased margin */
+    }
+    .micro-practice-section .check-btn:hover{
+      opacity:0.9;
+      box-shadow:0 0 12px var(--accent-green);
+    }
+    .feedback-message{
+      margin-top:12px; /* Increased margin */
+      font-weight:500;
+      font-size:0.95rem;
+    }
+
+    /* General Exercise Section */
+    .exercise-section{
+      background:var(--card-soft-bg);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:var(--radius-md);
+      padding:24px; /* Increased padding */
+      margin-top:32px; /* Increased margin */
+      margin-bottom:32px; /* Increased margin */
+    }
+    .exercise-section h3{
+      font-size:1.25rem;
+      color:var(--accent-yello);
+      margin-bottom:18px; /* Increased margin */
+      text-align:center;
+    }
+    .exercise-item{
+      margin-bottom:20px; /* Increased margin */
+    }
+    .exercise-item p{
+      margin-bottom:10px; /* Increased margin */
+      color:#fff;
+      font-weight:500;
+    }
+    .exercise-item input[type="text"]{
+      width:100%;
+      padding:10px 14px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      border:1px solid rgba(255,255,255,0.2);
+      background:rgba(0,0,0,0.3);
+      color:#fff;
+      font-size:1rem;
+    }
+    .exercise-item input[type="text"]:focus{
+      outline:none;
+      border-color:var(--accent-yello);
+      box-shadow:0 0 8px rgba(255,226,95,0.5);
+    }
+    .exercise-section .check-all-btn{
+      background:var(--accent-purple);
+      color:var(--bg-main);
+      padding:12px 24px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      transition:var(--transition-fast);
+      display:block;
+      margin:20px auto 0; /* Centered with margin */
+    }
+    .exercise-section .check-all-btn:hover{
+      opacity:0.9;
+      box-shadow:0 0 12px var(--accent-purple);
+    }
+
+    /* Record Button Section */
+    .record-section{
+      background:var(--card-soft-bg);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:var(--radius-md);
+      padding:24px; /* Increased padding */
+      margin-top:32px; /* Increased margin */
+      margin-bottom:32px; /* Increased margin */
+      text-align:center;
+    }
+    .record-section h3{
+      font-size:1.25rem;
+      color:var(--accent-cyan);
+      margin-bottom:18px; /* Increased margin */
+    }
+    .record-btn-container{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:15px; /* Increased gap */
+      margin-bottom:15px; /* Increased margin */
+    }
+    .record-btn{
+      background:var(--accent-pink);
+      color:#fff;
+      padding:12px 25px; /* Increased padding */
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:1.1rem;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      transition:var(--transition-fast);
+      box-shadow:0 0 15px rgba(255,47,146,0.6);
+    }
+    .record-btn:hover{
+      box-shadow:0 0 20px rgba(255,47,146,0.8);
+      transform:scale(1.02);
+    }
+    .record-btn.recording{
+      background:linear-gradient(90deg, var(--accent-pink), #ff0000);
+      box-shadow:0 0 25px rgba(255,0,0,0.8);
+      animation:pulse-record 1.5s infinite alternate;
+    }
+    @keyframes pulse-record{
+      from{transform:scale(1);}
+      to{transform:scale(1.03);}
+    }
+    .record-status{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin-bottom:15px; /* Increased margin */
+    }
+    .reset-record-btn{
+      background:transparent;
+      border:1px dashed rgba(255,255,255,0.3);
+      color:var(--muted);
+      padding:8px 15px; /* Increased padding */
+      border-radius:999px;
+      cursor:pointer;
+      font-size:0.85rem;
+      transition:var(--transition-fast);
+    }
+    .reset-record-btn:hover{
+      border-color:var(--accent-yello);
+      color:var(--accent-yello);
+    }
+
+    /* Export Bar */
+    .export-bar{
+      display:flex;
+      justify-content:flex-end;
+      gap:12px; /* Increased gap */
+      margin-top:32px; /* Increased margin */
+      padding-top:20px; /* Increased padding */
+      border-top:1px dashed rgba(255,255,255,0.1);
+    }
+    .export-btn{
+      background:var(--accent-purple);
+      color:#fff;
+      padding:10px 20px; /* Increased padding */
+      border-radius:var(--radius-sm);
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      transition:var(--transition-fast);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .export-btn:hover{
+      opacity:0.9;
+      box-shadow:0 0 12px var(--accent-purple);
+    }
+
+    /* Footer Navigation */
+    .footer-nav{
+      display:flex;
+      justify-content:space-between;
+      margin-top:32px; /* Increased margin */
+      padding-top:20px; /* Increased padding */
+      border-top:1px dashed rgba(255,255,255,0.1);
+    }
+    .nav-btn{
+      background:var(--card-soft-bg);
+      color:var(--accent-cyan);
+      padding:12px 25px; /* Increased padding */
+      border-radius:var(--radius-md);
+      border:1px solid var(--accent-cyan);
+      cursor:pointer;
+      font-weight:600;
+      transition:var(--transition-fast);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .nav-btn:hover{
+      box-shadow:0 0 15px rgba(78,242,255,0.6);
+      transform:translateY(-2px);
+    }
+    .nav-btn:disabled{
+      opacity:0.4;
+      cursor:not-allowed;
+      box-shadow:none;
+      transform:none;
+    }
+    .nav-btn.next{
+      background:var(--accent-pink);
+      border-color:var(--accent-pink);
+      color:#fff;
+    }
+    .nav-btn.next:hover{
+      box-shadow:0 0 15px rgba(255,47,146,0.6);
+    }
+
+    .footer-meta{
+      text-align:center;
+      color:var(--muted);
+      font-size:0.8rem;
+      margin-top:32px; /* Increased margin */
+      padding-top:20px; /* Increased padding */
+      border-top:1px dashed rgba(255,255,255,0.05);
+    }
+
+    /* General utility classes */
+    .text-center{text-align:center;}
+    .mb-3{margin-bottom:1rem;}
+    .mt-4{margin-top:1.5rem;}
+    .emoji{font-size:1.2em; vertical-align:middle;}
+    .highlight{
+      background:linear-gradient(90deg, var(--accent-cyan), var(--accent-yello));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:700;
+    }
+    .highlight-pink{
+      background:linear-gradient(90deg, var(--accent-pink), var(--accent-yello));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:700;
+    }
+    .note{
+      font-style:italic;
+      color:var(--muted);
+      font-size:0.9em;
+      margin-top:15px;
+      margin-bottom:15px;
+      display:block;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body{padding:15px;}
+      .neon-header{padding:15px; margin-bottom:20px;}
+      .header-main{flex-direction:column; text-align:center; gap:10px;}
+      .teacher-orb{width:50px; height:50px;}
+      .brand-title{font-size:1.2rem;}
+      .brand-sub{font-size:0.85rem;}
+      .lesson-title{font-size:1.15rem; margin-top:10px;}
+      .tabs{flex-direction:column; gap:8px; margin-bottom:20px;}
+      .tab{padding:10px 15px; font-size:0.9rem;}
+      .panel{padding:20px;}
+      .card-inner{padding:15px; margin-bottom:15px;}
+      .section-title{font-size:1.3rem; margin-bottom:15px;}
+      .section-sub{font-size:1rem; margin-bottom:20px;}
+      .sub-title{font-size:1.1rem; margin-top:20px; margin-bottom:10px;}
+      .paragraph{margin-bottom:12px;}
+      .block-container{gap:8px; margin-top:12px; margin-bottom:12px;}
+      .block{padding:8px 12px; font-size:1rem;}
+      .example-en{font-size:1.2rem; margin-top:15px; margin-bottom:8px;}
+      .example-pt{font-size:1rem; margin-bottom:15px;}
+      .super-tip{padding:12px 15px; margin-top:20px; margin-bottom:20px;}
+      .micro-practice-section{padding:15px; margin-top:20px; margin-bottom:20px;}
+      .micro-practice-section .sub-title{font-size:1rem;}
+      .micro-practice-section input[type="text"]{padding:8px 10px; margin-bottom:8px;}
+      .micro-practice-section .check-btn{padding:8px 15px;}
+      .exercise-section{padding:20px; margin-top:20px; margin-bottom:20px;}
+      .exercise-section h3{font-size:1.1rem; margin-bottom:15px;}
+      .exercise-item{margin-bottom:15px;}
+      .exercise-item p{font-size:0.95rem; margin-bottom:8px;}
+      .exercise-item input[type="text"]{padding:8px 10px;}
+      .exercise-section .check-all-btn{padding:10px 20px; margin-top:15px;}
+      .record-section{padding:20px; margin-top:20px; margin-bottom:20px;}
+      .record-section h3{font-size:1.1rem; margin-bottom:15px;}
+      .record-btn{padding:10px 20px; font-size:1rem;}
+      .record-status{font-size:0.9rem;}
+      .reset-record-btn{padding:6px 12px; font-size:0.8rem;}
+      .export-bar{flex-direction:column; align-items:stretch; gap:10px; margin-top:20px; padding-top:15px;}
+      .export-btn{padding:10px 15px; justify-content:center;}
+      .footer-nav{margin-top:20px; padding-top:15px;}
+      .nav-btn{padding:10px 15px; font-size:0.9rem;}
+      .footer-meta{margin-top:20px; padding-top:15px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="neon-header">
+      <div class="header-main">
+        <div class="teacher-orb"></div>
+        <div>
+          <h1 class="brand-title">NEXTATION</h1>
+          <p class="brand-sub">Seu Portal Imersivo de Inglês</p>
+        </div>
+      </div>
+      <h2 class="lesson-title">Negatives: Don't, Doesn't, Didn't, Isn't, Aren't</h2>
+      <div class="controls-row">
+        <button class="small-btn" onclick="copyToSpreadsheet()">📋 Copiar para Planilha</button>
+        <button class="small-btn" onclick="exportPdf()">📄 Exportar PDF</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab" data-tab="overview" onclick="showTab('overview')"><span>🧠 Overview</span></button>
+      <button class="tab" data-tab="dont-like" onclick="showTab('dont-like')"><span>🚫 I don't like tea.</span></button>
+      <button class="tab" data-tab="doesnt-work" onclick="showTab('doesnt-work')"><span>🚫 She doesn't work.</span></button>
+      <button class="tab" data-tab="didnt-call" onclick="showTab('didnt-call')"><span>🚫 They didn't call.</span></button>
+      <button class="tab" data-tab="isnt-working" onclick="showTab('isnt-working')"><span>🚫 He isn't working.</span></button>
+      <button class="tab" data-tab="arent-ready" onclick="showTab('arent-ready')"><span>🚫 We aren't ready.</span></button>
+      <button class="tab" data-tab="practice" onclick="showTab('practice')"><span>✍️ Practice Time!</span></button>
+      <button class="tab" data-tab="talk-it-out" onclick="showTab('talk-it-out')"><span>🗣️ Talk it Out!</span></button>
+    </nav>
+
+    <main class="panels">
+      <!-- TAB 1: OVERVIEW -->
+      <section id="panel-overview" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">Negatives em Inglês: O "NÃO" tem regras! 🧐</h3>
+          <p class="section-sub">
+            Em português, a gente só coloca "não" antes do verbo. Em inglês, a coisa é um pouco diferente! 
+            Precisamos de "ajudantes" para formar as frases negativas, dependendo do tempo verbal e do tipo de verbo.
+          </p>
+
+          <div class="sub-title">A Regra de Ouro dos Negativos: O "Verbo Auxiliar"</div>
+          <p class="paragraph">
+            Em inglês, para dizer "não", você quase sempre precisa de um <strong class="highlight">verbo auxiliar</strong> (um "ajudante") antes do "not".
+            Pense assim: o verbo principal é o ator principal, mas ele precisa de um diretor (o auxiliar) para dizer "não" na cena! 🎬
+          </p>
+          <p class="paragraph">
+            Existem duas grandes famílias de "diretores" para o "não":
+          </p>
+          <ul style="margin-left: 25px; margin-bottom: 20px; list-style: disc; color: var(--muted);">
+            <li style="margin-bottom: 10px;"><strong class="highlight-pink">Família DO/DOES/DID:</strong> Usada com <em class="highlight-yello">verbos de ação</em> no Presente Simples e Passado Simples.</li>
+            <li style="margin-bottom: 10px;"><strong class="highlight-pink">Família BE (Am/Is/Are/Was/Were):</strong> Usada com o <em class="highlight-yello">próprio verbo "to be"</em> (ser/estar) e com o <em class="highlight-yello">Present Continuous</em> (verbos com -ing).</li>
+          </ul>
+
+          <div class="super-tip">
+            <strong>É NOSSO!</strong> 🇧🇷 Imagine que o inglês é mais "educado" ou "organizado". Ele não deixa o "not" sozinho! Ele sempre pede para um "auxiliar" vir na frente e segurar a mão do "not".
+          </div>
+
+          <div class="sub-title">Negativos com Verbos de Ação (Presente e Passado Simples)</div>
+          <p class="paragraph">
+            Quando o verbo principal é uma <strong class="highlight">ação</strong> (like, work, call, eat, study), e estamos no Presente ou Passado Simples, precisamos do auxiliar <strong class="highlight-pink">DO/DOES/DID</strong>.
+          </p>
+          <div class="block-container">
+            <div class="block">Subject</div>
+            <div class="block pink">DO/DOES/DID + NOT</div>
+            <div class="block yellow">Verb (base form)</div>
+            <div class="block green">Rest of sentence</div>
+          </div>
+          <p class="paragraph">
+            Atenção: O verbo principal <strong class="highlight-yello">volta para a forma base</strong> quando você usa DO/DOES/DID! É como se o auxiliar já levasse a "marca" do tempo verbal.
+          </p>
+
+          <div class="sub-title">Negativos com o Verbo "To Be" e Present Continuous</div>
+          <p class="paragraph">
+            Quando o verbo principal <strong class="highlight">JÁ É o "to be"</strong> (am, is, are, was, were) ou quando estamos no <strong class="highlight">Present Continuous</strong> (verbo com -ing), o próprio "to be" já é o auxiliar! Ele não precisa de DO/DOES/DID.
+          </p>
+          <div class="block-container">
+            <div class="block">Subject</div>
+            <div class="block pink">AM/IS/ARE/WAS/WERE + NOT</div>
+            <div class="block yellow">Verb-ING / Adjective / Noun</div>
+            <div class="block green">Rest of sentence</div>
+          </div>
+          <p class="paragraph">
+            Nesse caso, é só colocar o <strong class="highlight-pink">NOT</strong> logo depois da forma do "to be". Simples assim!
+          </p>
+
+          <div class="super-tip">
+            <strong>Dica de Sobrevivência:</strong> Se a frase <strong class="highlight">já tem</strong> um "am", "is", "are", "was", "were", "will", "can", "must", "should" (etc.), <strong class="highlight-pink">NUNCA use DO/DOES/DID</strong>. O "not" vai sempre depois do primeiro auxiliar que aparecer!
+          </div>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase Negativa! 🛠️</h4>
+            <p class="paragraph">Use os blocos para montar a frase: "Eu não gosto de café."</p>
+            <label for="overview-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="overview-ex1-1" placeholder="Ex: I">
+            <label for="overview-ex1-2">Bloco 2 (Auxiliar + Not):</label>
+            <input type="text" id="overview-ex1-2" placeholder="Ex: don't">
+            <label for="overview-ex1-3">Bloco 3 (Verb base form):</label>
+            <input type="text" id="overview-ex1-3" placeholder="Ex: like">
+            <label for="overview-ex1-4">Bloco 4 (Rest of sentence):</label>
+            <input type="text" id="overview-ex1-4" placeholder="Ex: coffee">
+            <button class="check-btn" onclick="checkMicroPractice('overview-ex1', ['I', 'don\'t', 'like', 'coffee'], 'I don\'t like coffee.')">Verificar</button>
+            <p id="overview-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: I don't like tea. -->
+      <section id="panel-dont-like" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🚫 I don't like tea.</h3>
+          <p class="section-sub">
+            Vamos começar com o Presente Simples Negativo. Usamos <strong class="highlight-pink">don't</strong> para dizer "não" com verbos de ação para a maioria dos sujeitos.
+          </p>
+
+          <div class="example-en">
+            <button class="speak-btn" onclick="speak('I don\'t like tea.')">🔊</button>
+            I don’t like tea.
+          </div>
+          <div class="block-container">
+            <div class="block">I</div>
+            <div class="block pink">don’t like</div>
+            <div class="block yellow">tea</div>
+          </div>
+          <div class="example-pt">Eu não gosto de chá.</div>
+
+          <div class="super-tip">
+            <strong>É NOSSO!</strong> 🇧🇷 Pense no "don't" como o "não" que você usa para falar de hábitos ou preferências. "Eu não gosto", "Eu não trabalho", "Nós não estudamos".
+          </div>
+
+          <div class="sub-title">Walkthrough: Montando "I don't like tea."</div>
+          <p class="paragraph">
+            1. Começamos com o <strong class="highlight">sujeito</strong>: <span class="block">I</span> (Eu).<br>
+            2. O verbo "like" (gostar) é uma ação. Estamos no Presente Simples. O sujeito é "I". Então, o auxiliar negativo é <strong class="highlight-pink">don't</strong>.<br>
+            3. Juntamos o auxiliar com o verbo na forma base: <span class="block pink">don't like</span> (não gosto).<br>
+            4. E o resto da frase: <span class="block yellow">tea</span> (chá).<br>
+            <span class="note">Ficou: <strong class="highlight">I don't like tea.</strong></span>
+          </p>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase! 🛠️</h4>
+            <p class="paragraph">Monte a frase: "Nós não comemos carne."</p>
+            <label for="dont-like-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="dont-like-ex1-1" placeholder="Ex: We">
+            <label for="dont-like-ex1-2">Bloco 2 (Auxiliar + Not + Verb):</label>
+            <input type="text" id="dont-like-ex1-2" placeholder="Ex: don't eat">
+            <label for="dont-like-ex1-3">Bloco 3 (Rest of sentence):</label>
+            <input type="text" id="dont-like-ex1-3" placeholder="Ex: meat">
+            <button class="check-btn" onclick="checkMicroPractice('dont-like-ex1', ['We', 'don\'t eat', 'meat'], 'We don\'t eat meat.')">Verificar</button>
+            <p id="dont-like-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: She doesn't work on weekends. -->
+      <section id="panel-doesnt-work" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🚫 She doesn’t work on weekends.</h3>
+          <p class="section-sub">
+            Quando o sujeito é <strong class="highlight">He, She ou It</strong> no Presente Simples, o auxiliar negativo muda para <strong class="highlight-pink">doesn't</strong>.
+          </p>
+
+          <div class="example-en">
+            <button class="speak-btn" onclick="speak('She doesn\'t work on weekends.')">🔊</button>
+            She doesn’t work on weekends.
+          </div>
+          <div class="block-container">
+            <div class="block">She</div>
+            <div class="block pink">doesn’t work</div>
+            <div class="block yellow">on weekends</div>
+          </div>
+          <div class="example-pt">Ela não trabalha nos fins de semana.</div>
+
+          <div class="super-tip">
+            <strong>IMAGINE QUE...</strong> 💡 O "s" do "she works" migra para o "do" e vira "does". Aí o verbo principal ("work") volta para a forma base, sem "s"!
+          </div>
+
+          <div class="sub-title">Walkthrough: Montando "She doesn't work on weekends."</div>
+          <p class="paragraph">
+            1. Começamos com o <strong class="highlight">sujeito</strong>: <span class="block">She</span> (Ela).<br>
+            2. O verbo "work" (trabalhar) é uma ação. Presente Simples. O sujeito é "She". Então, o auxiliar negativo é <strong class="highlight-pink">doesn't</strong>.<br>
+            3. Juntamos o auxiliar com o verbo na forma base: <span class="block pink">doesn't work</span> (não trabalha).<br>
+            4. E o resto da frase: <span class="block yellow">on weekends</span> (nos fins de semana).<br>
+            <span class="note">Ficou: <strong class="highlight">She doesn't work on weekends.</strong></span>
+          </p>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase! 🛠️</h4>
+            <p class="paragraph">Monte a frase: "Ele não estuda muito."</p>
+            <label for="doesnt-work-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="doesnt-work-ex1-1" placeholder="Ex: He">
+            <label for="doesnt-work-ex1-2">Bloco 2 (Auxiliar + Not + Verb):</label>
+            <input type="text" id="doesnt-work-ex1-2" placeholder="Ex: doesn't study">
+            <label for="doesnt-work-ex1-3">Bloco 3 (Rest of sentence):</label>
+            <input type="text" id="doesnt-work-ex1-3" placeholder="Ex: much">
+            <button class="check-btn" onclick="checkMicroPractice('doesnt-work-ex1', ['He', 'doesn\'t study', 'much'], 'He doesn\'t study much.')">Verificar</button>
+            <p id="doesnt-work-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: They didn't call me. -->
+      <section id="panel-didnt-call" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🚫 They didn’t call me.</h3>
+          <p class="section-sub">
+            Para o Passado Simples, o auxiliar negativo é <strong class="highlight-pink">didn't</strong> para <strong class="highlight">TODOS</strong> os sujeitos. E o verbo principal volta para a forma base!
+          </p>
+
+          <div class="example-en">
+            <button class="speak-btn" onclick="speak('They didn\'t call me.')">🔊</button>
+            They didn’t call me.
+          </div>
+          <div class="block-container">
+            <div class="block">They</div>
+            <div class="block pink">didn’t call</div>
+            <div class="block yellow">me</div>
+          </div>
+          <div class="example-pt">Eles não me ligaram.</div>
+
+          <div class="super-tip">
+            <strong>FACILITADOR!</strong> 🎉 O "didn't" é um coringa! Serve para todo mundo no passado. É como o "não" do passado que já leva a marca do tempo, então o verbo fica "limpo".
+          </div>
+
+          <div class="sub-title">Walkthrough: Montando "They didn't call me."</div>
+          <p class="paragraph">
+            1. Começamos com o <strong class="highlight">sujeito</strong>: <span class="block">They</span> (Eles).<br>
+            2. O verbo "call" (ligar) é uma ação. Estamos no Passado Simples. O auxiliar negativo é <strong class="highlight-pink">didn't</strong>.<br>
+            3. Juntamos o auxiliar com o verbo na forma base: <span class="block pink">didn't call</span> (não ligaram).<br>
+            4. E o resto da frase: <span class="block yellow">me</span> (para mim/me).<br>
+            <span class="note">Ficou: <strong class="highlight">They didn't call me.</strong></span>
+          </p>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase! 🛠️</h4>
+            <p class="paragraph">Monte a frase: "Eu não fui à festa."</p>
+            <label for="didnt-call-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="didnt-call-ex1-1" placeholder="Ex: I">
+            <label for="didnt-call-ex1-2">Bloco 2 (Auxiliar + Not + Verb):</label>
+            <input type="text" id="didnt-call-ex1-2" placeholder="Ex: didn't go">
+            <label for="didnt-call-ex1-3">Bloco 3 (Rest of sentence):</label>
+            <input type="text" id="didnt-call-ex1-3" placeholder="Ex: to the party">
+            <button class="check-btn" onclick="checkMicroPractice('didnt-call-ex1', ['I', 'didn\'t go', 'to the party'], 'I didn\'t go to the party.')">Verificar</button>
+            <p id="didnt-call-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: He isn't working today. -->
+      <section id="panel-isnt-working" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🚫 He isn’t working today.</h3>
+          <p class="section-sub">
+            No Present Continuous (ações que estão acontecendo agora), o verbo "to be" já é o auxiliar. É só colocar <strong class="highlight-pink">not</strong> depois dele!
+          </p>
+
+          <div class="example-en">
+            <button class="speak-btn" onclick="speak('He isn\'t working today.')">🔊</button>
+            He isn’t working today.
+          </div>
+          <div class="block-container">
+            <div class="block">He</div>
+            <div class="block pink">isn’t working</div>
+            <div class="block yellow">today</div>
+          </div>
+          <div class="example-pt">Ele não está trabalhando hoje.</div>
+
+          <div class="super-tip">
+            <strong>LEMBRE-SE:</strong> 💡 Se você já vê um "am", "is", "are" na frase, o "don't/doesn't/didn't" não entra! O "not" vai direto depois do "to be".
+          </div>
+
+          <div class="sub-title">Walkthrough: Montando "He isn't working today."</div>
+          <p class="paragraph">
+            1. Começamos com o <strong class="highlight">sujeito</strong>: <span class="block">He</span> (Ele).<br>
+            2. O verbo "to be" para "He" é "is". Para o negativo, fica <strong class="highlight-pink">isn't</strong>.<br>
+            3. O verbo principal "work" recebe -ing: <span class="block pink">working</span>.<br>
+            4. Juntamos tudo: <span class="block pink">isn't working</span> (não está trabalhando).<br>
+            5. E o resto da frase: <span class="block yellow">today</span> (hoje).<br>
+            <span class="note">Ficou: <strong class="highlight">He isn't working today.</strong></span>
+          </p>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase! 🛠️</h4>
+            <p class="paragraph">Monte a frase: "Eles não estão estudando agora."</p>
+            <label for="isnt-working-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="isnt-working-ex1-1" placeholder="Ex: They">
+            <label for="isnt-working-ex1-2">Bloco 2 (Auxiliar + Not + Verb-ing):</label>
+            <input type="text" id="isnt-working-ex1-2" placeholder="Ex: aren't studying">
+            <label for="isnt-working-ex1-3">Bloco 3 (Rest of sentence):</label>
+            <input type="text" id="isnt-working-ex1-3" placeholder="Ex: now">
+            <button class="check-btn" onclick="checkMicroPractice('isnt-working-ex1', ['They', 'aren\'t studying', 'now'], 'They aren\'t studying now.')">Verificar</button>
+            <p id="isnt-working-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: We aren't ready yet. -->
+      <section id="panel-arent-ready" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🚫 We aren’t ready yet.</h3>
+          <p class="section-sub">
+            Quando o verbo principal <strong class="highlight">É</strong> o "to be" (ser/estar) e descreve um estado ou característica, é só colocar <strong class="highlight-pink">not</strong> depois dele.
+          </p>
+
+          <div class="example-en">
+            <button class="speak-btn" onclick="speak('We aren\'t ready yet.')">🔊</button>
+            We aren’t ready yet.
+          </div>
+          <div class="block-container">
+            <div class="block">We</div>
+            <div class="block pink">aren’t</div>
+            <div class="block yellow">ready</div>
+            <div class="block green">yet</div>
+          </div>
+          <div class="example-pt">Nós não estamos prontos ainda.</div>
+
+          <div class="super-tip">
+            <strong>PENSE ASSIM:</strong> 🤔 Se em português você usa "Eu *sou* não" ou "Eu *estou* não" (o que não faz sentido!), em inglês é "I *am* not". O "to be" já é forte o suficiente para carregar o "not" sozinho.
+          </div>
+
+          <div class="sub-title">Walkthrough: Montando "We aren't ready yet."</div>
+          <p class="paragraph">
+            1. Começamos com o <strong class="highlight">sujeito</strong>: <span class="block">We</span> (Nós).<br>
+            2. O verbo "to be" para "We" é "are". Para o negativo, fica <strong class="highlight-pink">aren't</strong>.<br>
+            3. O adjetivo é <span class="block yellow">ready</span> (prontos).<br>
+            4. E o advérbio de tempo: <span class="block green">yet</span> (ainda).<br>
+            <span class="note">Ficou: <strong class="highlight">We aren't ready yet.</strong></span>
+          </p>
+
+          <div class="micro-practice-section">
+            <h4 class="sub-title">Micro-Prática: Monte a Frase! 🛠️</h4>
+            <p class="paragraph">Monte a frase: "Ela não está em casa."</p>
+            <label for="arent-ready-ex1-1">Bloco 1 (Subject):</label>
+            <input type="text" id="arent-ready-ex1-1" placeholder="Ex: She">
+            <label for="arent-ready-ex1-2">Bloco 2 (Auxiliar + Not):</label>
+            <input type="text" id="arent-ready-ex1-2" placeholder="Ex: isn't">
+            <label for="arent-ready-ex1-3">Bloco 3 (Rest of sentence):</label>
+            <input type="text" id="arent-ready-ex1-3" placeholder="Ex: at home">
+            <button class="check-btn" onclick="checkMicroPractice('arent-ready-ex1', ['She', 'isn\'t', 'at home'], 'She isn\'t at home.')">Verificar</button>
+            <p id="arent-ready-ex1-feedback" class="feedback-message"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: Practice Time! -->
+      <section id="panel-practice" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">✍️ Practice Time! - Negatives Mix</h3>
+          <p class="section-sub">
+            Agora é a hora de misturar tudo e testar seu conhecimento! Transforme as frases afirmativas em negativas, usando a forma correta.
+          </p>
+
+          <div class="exercise-section">
+            <h3>Transforme para a forma Negativa:</h3>
+            <div class="exercise-item">
+              <p>1. I like coffee. ☕</p>
+              <input type="text" id="write-ex1-1" placeholder="Sua resposta aqui...">
+            </div>
+            <div class="exercise-item">
+              <p>2. He works on Sundays. 🗓️</p>
+              <input type="text" id="write-ex1-2" placeholder="Sua resposta aqui...">
+            </div>
+            <div class="exercise-item">
+              <p>3. We called them yesterday. 📞</p>
+              <input type="text" id="write-ex1-3" placeholder="Sua resposta aqui...">
+            </div>
+            <div class="exercise-item">
+              <p>4. She is reading a book. 📚</p>
+              <input type="text" id="write-ex1-4" placeholder="Sua resposta aqui...">
+            </div>
+            <div class="exercise-item">
+              <p>5. They are happy. 😊</p>
+              <input type="text" id="write-ex1-5" placeholder="Sua resposta aqui...">
+            </div>
+            <button class="check-all-btn" onclick="checkWritingExercise1()">Verificar Todas as Respostas</button>
+            <p id="write-ex1-feedback" class="feedback-message text-center"></p>
+          </div>
+
+          <div class="super-tip">
+            <strong>Dica EXTRA:</strong> Sempre se pergunte: "Essa frase tem 'to be' (am/is/are/was/were) ou um Modal (can/must/should/will)?". Se sim, o 'not' vai depois dele. Se não, e é um verbo de ação, use 'don't/doesn't/didn't'!
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 8: Talk it Out! -->
+      <section id="panel-talk-it-out" class="panel">
+        <div class="card-inner">
+          <h3 class="section-title">🗣️ Talk it Out! - Prática de Fala</h3>
+          <p class="section-sub">
+            A melhor forma de fixar é falando! Use o botão abaixo para se comprometer a praticar em voz alta.
+            Formule frases negativas com os verbos e auxiliares que aprendemos.
+          </p>
+
+          <div class="record-section">
+            <h3>Seu Momento de Fala!</h3>
+            <div class="record-btn-container">
+              <button id="record-btn" class="record-btn" onclick="toggleRecord()">
+                <span id="record-dot">⏺️</span>
+                <span id="record-text">Marcar momento de prática</span>
+              </button>
+            </div>
+            <p id="audio-status" class="record-status">Nenhum áudio real é gravado – use o botão como compromisso de prática em voz alta. 🎧</p>
+            <button class="reset-record-btn" onclick="resetPractice()">Resetar Prática</button>
+          </div>
+
+          <div class="super-tip">
+            <strong>DESAFIO:</strong> Tente criar frases negativas sobre o seu dia. "I didn't eat breakfast." "I'm not working tomorrow." "My friend doesn't like to wake up early."
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="export-bar">
+      <button class="export-btn" onclick="copyToSpreadsheet()">📋 Copiar Tudo para Planilha</button>
+      <button class="export-btn" onclick="exportPdf()">📄 Exportar Lição em PDF</button>
+    </div>
+
+    <footer class="footer-nav">
+      <button id="prev-btn" class="nav-btn" onclick="prevTab()" disabled>← Anterior</button>
+      <button id="next-btn" class="nav-btn next" onclick="nextTab()">Próximo →</button>
+    </footer>
+
+    <div class="footer-meta">
+      <p>NEXTATION © 2026. Todos os direitos reservados.</p>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const tabOrder = ['overview', 'dont-like', 'doesnt-work', 'didnt-call', 'isnt-working', 'arent-ready', 'practice', 'talk-it-out'];
+    let currentTabIndex = 0;
+
+    function showTab(tabId) {
+      document.querySelectorAll('.panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tabButton => {
+        tabButton.classList.remove('active');
+      });
+
+      document.getElementById(`panel-${tabId}`).classList.add('active');
+      document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+
+      currentTabIndex = tabOrder.indexOf(tabId);
+      updateNavigationButtons();
+    }
+
+    function updateNavigationButtons() {
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+
+      prevBtn.disabled = currentTabIndex === 0;
+      nextBtn.disabled = currentTabIndex === tabOrder.length - 1;
+    }
+
+    function nextTab() {
+      if (currentTabIndex < tabOrder.length - 1) {
+        currentTabIndex++;
+        showTab(tabOrder[currentTabIndex]);
+      }
+    }
+
+    function prevTab() {
+      if (currentTabIndex > 0) {
+        currentTabIndex--;
+        showTab(tabOrder[currentTabIndex]);
+      }
+    }
+
+    function normalizeSimple(text) {
+      return text.toLowerCase().replace(/[.,!?;'\s]/g, '').trim();
+    }
+
+    // Micro Practice Check Function (for small input fields)
+    function checkMicroPractice(exerciseId, correctAnswers, fullSentence) {
+      let allCorrect = true;
+      const inputs = [];
+      for (let i = 1; i <= correctAnswers.length; i++) {
+        const input = document.getElementById(`${exerciseId}-${i}`);
+        inputs.push(input);
+        if (input && normalizeSimple(input.value) !== normalizeSimple(correctAnswers[i-1])) {
+          allCorrect = false;
+        }
+      }
+      const feedback = document.getElementById(`${exerciseId}-feedback`);
+
+      if (feedback) {
+        if (allCorrect) {
+          feedback.textContent = `Perfeito! "${fullSentence}" ✅`;
+          feedback.style.color = '#4dff9b';
+        } else {
+          feedback.textContent = `Quase. Tente novamente. A frase completa é: "${fullSentence}"`;
+          feedback.style.color = '#ff8aa8';
+        }
+      }
+    }
+
+    // Writing Exercise 1: Transform sentences
+    function checkWritingExercise1(){
+      const q1 = document.getElementById('write-ex1-1').value;
+      const q2 = document.getElementById('write-ex1-2').value;
+      const q3 = document.getElementById('write-ex1-3').value;
+      const q4 = document.getElementById('write-ex1-4').value;
+      const q5 = document.getElementById('write-ex1-5').value;
+      const feedback = document.getElementById('write-ex1-feedback');
+
+      const targets = [
+        'I don\'t like coffee.',
+        'He doesn\'t work on Sundays.',
+        'We didn\'t call them yesterday.',
+        'She isn\'t reading a book.',
+        'They aren\'t happy.'
+      ];
+
+      let allCorrect = true;
+      const userAnswers = [q1, q2, q3, q4, q5];
+      for(let i=0; i<targets.length; i++){
+        if(normalizeSimple(userAnswers[i]) !== normalizeSimple(targets[i])){
+          allCorrect = false;
+          break;
+        }
+      }
+
+      if(allCorrect){
+        feedback.textContent = 'Excelente! Todas as frases estão corretas na forma negativa. ✅';
+        feedback.style.color = '#4dff9b';
+      }else{
+        feedback.textContent = 'Algumas respostas estão incorretas. Revise a forma negativa correta para cada tempo verbal.';
+        feedback.style.color = '#ff8aa8';
+      }
+    }
+
+    const writeArea = document.getElementById('write-area');
+    const counterEl = document.getElementById('char-counter');
+    if(writeArea && counterEl){
+      writeArea.addEventListener('input', () => {
+        counterEl.textContent = writeArea.value.length + ' caracteres';
+      });
+    }
+
+    let recording = false;
+    function toggleRecord(){
+      recording = !recording;
+      const btn = document.getElementById('record-btn');
+      const txt = document.getElementById('record-text');
+      const dot = document.getElementById('record-dot');
+      const status = document.getElementById('audio-status');
+      if(!btn || !txt || !dot || !status) return;
+
+      if(recording){
+        btn.classList.add('recording');
+        dot.textContent = '🔴';
+        txt.textContent = 'Praticando agora...';
+        status.innerHTML = 'Momento de prática: fale em voz alta suas frases negativas. Use: <strong>don\'t, doesn\'t, didn\'t, isn\'t, aren\'t</strong> e outros que você criar! 🎧';
+      }else{
+        btn.classList.remove('recording');
+        dot.textContent = '⏺️';
+        txt.textContent = 'Marcar momento de prática';
+        status.textContent = 'Prática pausada. Clique de novo quando quiser focar na fala.';
+      }
+    }
+
+    function resetPractice(){
+      recording = false;
+      const btn = document.getElementById('record-btn');
+      const txt = document.getElementById('record-text');
+      const dot = document.getElementById('record-dot');
+      const status = document.getElementById('audio-status');
+      if(!btn || !txt || !dot || !status) return;
+
+      btn.classList.remove('recording');
+      dot.textContent = '⏺️';
+      txt.textContent = 'Marcar momento de prática';
+      status.innerHTML = 'Nenhum áudio real é gravado – use o botão como compromisso de prática em voz alta. 🎧';
+    }
+
+    function copyToSpreadsheet(){
+      const text = collectLessonText();
+      if(!navigator.clipboard){
+        alert('Seu navegador não permite cópia automática. Selecione o texto manualmente.');
+        return;
+      }
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('Conteúdo copiado! Cole (Ctrl+V) na sua planilha.');
+      }).catch(()=>{
+        alert('Não foi possível copiar automaticamente. Selecione e copie manualmente.');
+      });
+    }
+
+    function collectLessonText(){
+      const blocks = [];
+      document.querySelectorAll('.card-inner').forEach(inner=>{
+        const clone = inner.cloneNode(true);
+        // Remove interactive elements and non-content parts from the cloned content
+        clone.querySelectorAll('button, input, textarea, select, label, .micro-practice-section, .super-tip, .char-counter, .feedback-message, .controls-row, .export-bar, .footer-nav, .footer-meta, .neon-header, .tabs, .app, .block-container, .example-en, .example-pt, .section-sub, .section-title, .sub-title, .exercise-section').forEach(el=>el.remove());
+        // Clean up extra spaces/newlines
+        let cleanedText = clone.innerText.trim();
+        cleanedText = cleanedText.replace(/\s{2,}/g, ' '); // Replace multiple spaces with single space
+        cleanedText = cleanedText.replace(/\n\s*\n/g, '\n\n'); // Replace multiple newlines with double newline
+        blocks.push(cleanedText);
+      });
+      return blocks.join('\n\n-----------------------------\n\n');
+    }
+
+    async function exportPdf() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'pt', 'a4'); // 'p' for portrait, 'pt' for points, 'a4' for A4 size
+
+        const content = document.querySelector('.panels'); // Select the main content area
+
+        // Temporarily show all panels to capture content for PDF
+        const allPanels = document.querySelectorAll('.panel');
+        allPanels.forEach(panel => panel.style.display = 'block');
+
+        // Capture content with html2canvas
+        const canvas = await html2canvas(content, {
+            scale: 2, // Increase scale for better resolution
+            useCORS: true, // Enable cross-origin images if any
+            windowWidth: content.scrollWidth,
+            windowHeight: content.scrollHeight,
+            x: content.offsetLeft,
+            y: content.offsetTop,
+            width: content.offsetWidth,
+            height: content.offsetHeight
+        });
+
+        // Restore original panel display
+        allPanels.forEach(panel => panel.style.display = 'none');
+        document.querySelector('.panel.active').style.display = 'block'; // Show only the active panel again
+
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = 595; // A4 width in points
+        const pageHeight = 842; // A4 height in points
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            doc.addPage();
+            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        doc.save('NEXTATION_Lesson_Negatives.pdf');
+    }
+
+
+    // Initial tab display
+    document.addEventListener('DOMContentLoaded', () => {
+      showTab('overview');
+    });
+  </script>
+</body>
+</html>
